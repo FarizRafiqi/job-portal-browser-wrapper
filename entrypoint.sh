@@ -1,4 +1,4 @@
-#!/usr/bin/with-convenv bash
+#!/usr/bin/with-contenv bash
 set -e
 
 # LinuxServer/Selkies Chromium binds DevTools to loopback in current images.
