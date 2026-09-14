@@ -1,0 +1,8 @@
+#!/bin/bash
+exec wrapped-chromium \
+  --enable-features=UseOzonePlatform \
+  --ozone-platform=wayland \
+  --remote-debugging-port=9222 \
+  --remote-debugging-address=127.0.0.1 \
+  --remote-allow-origins=* \
+  ${CHROME_CLI}
