@@ -1,6 +1,6 @@
 FROM lscr.io/linuxserver/chromium:latest
 USER root
-RUN apt-get update && apt-get install -y --no-install-recommends nodejs npm && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends nodejs && rm -rf /var/lib/apt/lists/*
 WORKDIR /opt/job-worker
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev
