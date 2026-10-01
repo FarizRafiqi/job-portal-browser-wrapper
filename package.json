@@ -1,0 +1,23 @@
+{
+  "name": "job-portal-browser-wrapper",
+  "version": "1.0.0",
+  "description": "Private derived image for persistent Chromium with internal CDP forwarding.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test worker.test.cjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FarizRafiqi/job-portal-browser-wrapper.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/FarizRafiqi/job-portal-browser-wrapper/issues"
+  },
+  "homepage": "https://github.com/FarizRafiqi/job-portal-browser-wrapper#readme",
+  "dependencies": {
+    "ipaddr.js": "^2.2.0",
+    "playwright-core": "^1.58.2"
+  }
+}
