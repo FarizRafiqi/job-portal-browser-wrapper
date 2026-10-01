@@ -2,7 +2,7 @@ const {chromium}=require('playwright-core');const {validURL}=require('./worker.c
 function publicIP(raw){try{let ip=ipaddr.parse(raw);if(ip.kind()==='ipv6'&&ip.isIPv4MappedAddress())ip=ip.toIPv4Address();return ip.range()==='unicast';}catch{return false;}}
 function vacancyText(text,heading){const start=heading?text.indexOf(heading):-1;return (start>=0?text.slice(start):'').split(/Lowongan Lainnya Untukmu|Similar jobs|Recommended jobs/)[0].trim();}
 function sessionStatus({account,login,challenge}){return challenge?'portal_blocked':login?'login_required':account?'authenticated':'authentication_unverified';}
-async function read({portal,url,kind,limit=3},endpoint='http://[::1]:9222'){
+async function read({portal,url,kind,limit=3},endpoint='http://127.0.0.1:9222'){
  const v=await fetch(endpoint+'/json/version',{signal:AbortSignal.timeout(5000)}).then(r=>r.json());const e=new URL(endpoint);const ws=new URL(v.webSocketDebuggerUrl);ws.host=e.host;
  const browser=await chromium.connectOverCDP(ws.toString(),{timeout:10000});let page;
  const resolved=new Map();try{page=await browser.contexts()[0].newPage();await page.route('**/*',async route=>{const r=route.request();let u;try{u=new URL(r.url())}catch{return route.abort();}if(u.protocol!=='https:')return route.abort();try{if(!resolved.has(u.hostname))resolved.set(u.hostname,await dns.lookup(u.hostname,{all:true}));if(!resolved.get(u.hostname).every(a=>publicIP(a.address)))return route.abort();}catch{return route.abort();}if(r.isNavigationRequest()&&r.frame()===page.mainFrame()&&u.hostname!==(portal==='glints'?'glints.com':'id.jobstreet.com'))return route.abort();return route.continue();});

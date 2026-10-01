@@ -4,7 +4,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends nodejs && rm -r
 WORKDIR /opt/job-worker
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev
-COPY worker.cjs browser.cjs start-worker.cjs ./
+COPY worker.cjs browser.cjs start-worker.cjs verify-api.cjs ./
 COPY autostart_wayland /defaults/autostart_wayland
 COPY entrypoint.sh /usr/local/bin/job-portal-entrypoint.sh
 RUN chmod 0755 /defaults/autostart_wayland /usr/local/bin/job-portal-entrypoint.sh
